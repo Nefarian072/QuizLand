@@ -1,0 +1,6 @@
+@QuizLand.WebAPI_HostAddress = http://localhost:5087
+
+GET {{QuizLand.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
