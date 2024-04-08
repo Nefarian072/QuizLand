@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizLand.DataLayer.Core.Entities;
-
-public class BaseEntity: IEntity
+namespace QuizLand.DataLayer.Base.Repositories
 {
-    public int Id { get; set; }
+    internal class QuestionRepository
+    {
+    }
 }
