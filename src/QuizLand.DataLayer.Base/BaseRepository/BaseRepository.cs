@@ -7,8 +7,8 @@ namespace QuizLand.DataLayer.Base.BaseRepository;
 
 public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
 {
-    private readonly QuizLandDbContext _context;
-    private readonly DbSet<T> _dbSet;
+    protected readonly QuizLandDbContext _context;
+    protected readonly DbSet<T> _dbSet;
     public BaseRepository(QuizLandDbContext context)
     {
         _context = context;
@@ -16,13 +16,13 @@ public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
 
     }
 
-    public async void Create(T entity)
+    public virtual async Task CreateAsync(T entity)
     {
         await _dbSet.AddAsync(entity);
         await _context.SaveChangesAsync();
     }
 
-    public async void Delete(int id)
+    public virtual async Task Delete(int id)
     {
         var t = GetById(id);
         if (t == null)
@@ -43,8 +43,9 @@ public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
         return _dbSet.FirstOrDefault(x => x.Id == id);
     }
 
-    public void Update(T entity)
+    public async Task Update(T entity)
     {
-        _context.Update(entity);
+        _dbSet.Update(entity);
+        await _context.SaveChangesAsync();
     }
 }

@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizLand.DataLayer.Base.Interfaces
+namespace QuizLand.DataLayer.Base.Interfaces;
+
+public interface IPointRepository : IRepository<Point>
 {
-    public interface IPointRepository : IRepository<Point>
-    {
-    }
 }

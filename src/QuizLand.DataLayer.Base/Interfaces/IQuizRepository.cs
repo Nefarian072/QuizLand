@@ -1,8 +1,7 @@
 ﻿using QuizLand.DataLayer.Core.Entities;
 
-namespace QuizLand.DataLayer.Base.Interfaces
+namespace QuizLand.DataLayer.Base.Interfaces;
+
+public interface IQuizRepository : IRepository<Quiz>
 {
-    public interface IQuizRepository : IRepository<Quiz>
-    {
-    }
 }

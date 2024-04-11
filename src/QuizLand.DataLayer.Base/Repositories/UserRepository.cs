@@ -11,15 +11,10 @@ using System.Threading.Tasks;
 
 namespace QuizLand.DataLayer.Base.Repositories;
 
-public class UserRepository<T> : BaseRepository<T>, IUserRepository where T : User
+public class UserRepository : BaseRepository<User>, IUserRepository
 {
-    private readonly QuizLandDbContext _context;
-    private readonly DbSet<T> _dbSet;
     public UserRepository(QuizLandDbContext context) : base(context)
     {
-        _context = context;
-        _dbSet = _context.Set<T>();
     }
-    
 
 }
