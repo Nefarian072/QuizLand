@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizLand.WebAPI", "src\Quiz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizLand.DataLayer.Core", "src\QuizLand.DataLayer.Core\QuizLand.DataLayer.Core.csproj", "{DBB01E81-837A-4B8E-B8C6-9F6F00A0EAEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizLand.DataLayer.Base", "src\QuizLand.DataLayer.Base\QuizLand.DataLayer.Base.csproj", "{44423F84-2088-4668-806E-2E809B5A960C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizLand.DataLayer.Base", "src\QuizLand.DataLayer.Base\QuizLand.DataLayer.Base.csproj", "{44423F84-2088-4668-806E-2E809B5A960C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizLandInfrastructure", "QuizLandInfrastruction\QuizLandInfrastructure.csproj", "{75FC0B30-1E65-42F9-84B8-741611A1B50C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{44423F84-2088-4668-806E-2E809B5A960C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44423F84-2088-4668-806E-2E809B5A960C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44423F84-2088-4668-806E-2E809B5A960C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75FC0B30-1E65-42F9-84B8-741611A1B50C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75FC0B30-1E65-42F9-84B8-741611A1B50C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75FC0B30-1E65-42F9-84B8-741611A1B50C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75FC0B30-1E65-42F9-84B8-741611A1B50C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

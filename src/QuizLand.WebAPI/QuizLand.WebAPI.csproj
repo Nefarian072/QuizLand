@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\QuizLand.DataLayer.Base\QuizLand.DataLayer.Base.csproj" />
     <ProjectReference Include="..\QuizLand.DataLayer.Core\QuizLand.DataLayer.Core.csproj" />
   </ItemGroup>
