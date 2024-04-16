@@ -2,9 +2,9 @@
 
 namespace QuizLand.WebAPI;
 
-public class QuizLandDbContext:DbContext
+public class QuizLandDbContext : DbContext
 {
-    public QuizLandDbContext(DbContextOptions<QuizLandDbContext> options):base(options) 
+    public QuizLandDbContext(DbContextOptions<QuizLandDbContext> options) : base(options)
     {
 
     }

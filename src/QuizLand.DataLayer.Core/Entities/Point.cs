@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace QuizLand.DataLayer.Core.Entities;
-public class Point:BaseEntity
+public class Point : BaseEntity
 {
     [Key]
     public new int Id { get; set; }
