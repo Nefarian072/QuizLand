@@ -2,7 +2,7 @@
 
 namespace QuizLand.DataLayer.Core.Entities;
 
-public class Question:BaseEntity
+public class Question : BaseEntity
 {
     [Key]
     public new int Id { get; set; }
