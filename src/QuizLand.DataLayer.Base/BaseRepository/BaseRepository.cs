@@ -31,9 +31,9 @@ public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
         _dbSet.Remove(t);
     }
 
-    public IEnumerable<T> GetAll()
+    public async Task<IEnumerable<T>> GetAllAsync()
     {
-        return _dbSet.ToList<T>();
+        return await _dbSet.ToListAsync<T>();
     }
 
     public T? GetById(int id)

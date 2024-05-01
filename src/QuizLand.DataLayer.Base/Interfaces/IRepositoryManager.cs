@@ -7,4 +7,6 @@ public interface IRepositoryManager
     IQuizRepository QuizRepository { get; }
     IQuestionRepository QuestionRepository { get; }
 
+    Task Save();
+
 }

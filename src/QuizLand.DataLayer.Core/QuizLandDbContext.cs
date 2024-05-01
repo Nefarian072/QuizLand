@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuizLand.DataLayer.Core.Entities;
-
 namespace QuizLand.WebAPI;
 
 public class QuizLandDbContext : DbContext

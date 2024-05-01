@@ -10,5 +10,8 @@ public class UserRepository : BaseRepository<User>, IUserRepository
     public UserRepository(QuizLandDbContext context) : base(context)
     {
     }
-
+    public User? GetByEmail(string email)
+    {
+        return _context.Users.FirstOrDefault(u => u.Email == email);
+    }
 }
