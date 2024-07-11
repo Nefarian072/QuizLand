@@ -3,7 +3,7 @@ using QuizLand.DataLayer.Base.Interfaces;
 using QuizLand.DataLayer.Core.Entities;
 using QuizLandInfrastructure.Requests.Users.Commands;
 using QuizLandInfrastructure.Responses.Users.Commands;
-namespace QuizLandInfrastructure.Handlers.Users.Commands;
+namespace QuizLand.Infrastructure.Handlers.Users.Commands;
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, CreateUserCommandResult>
 {

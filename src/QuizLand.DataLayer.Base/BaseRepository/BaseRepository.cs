@@ -21,9 +21,9 @@ public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
         await _dbSet.AddAsync(entity);
     }
 
-    public virtual void Delete(int id)
+    public virtual async Task Delete(int id)
     {
-        var t = GetById(id);
+        var t = await GetById(id);
         if (t == null)
         {
             return;
@@ -36,9 +36,9 @@ public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
         return await _dbSet.ToListAsync<T>();
     }
 
-    public T? GetById(int id)
+    public async Task<T?> GetById(int id)
     {
-        return _dbSet.FirstOrDefault(x => x.Id == id);
+        return await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public void Update(T entity)

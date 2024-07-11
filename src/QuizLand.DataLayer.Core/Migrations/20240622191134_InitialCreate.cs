@@ -12,40 +12,19 @@ namespace QuizLand.DataLayer.Core.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Points",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Count = table.Column<int>(type: "integer", nullable: false),
-                    UsertId = table.Column<int>(type: "integer", nullable: false),
-                    QuizId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Points", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Quizzes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Theme = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    QuestionId = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    PointId = table.Column<int>(type: "integer", nullable: true)
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    CreatorId = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Quizzes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Quizzes_Points_PointId",
-                        column: x => x.PointId,
-                        principalTable: "Points",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -91,43 +70,46 @@ namespace QuizLand.DataLayer.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PointUser",
+                name: "Points",
                 columns: table => new
                 {
-                    PointsId = table.Column<int>(type: "integer", nullable: false),
-                    UsersId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Count = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    QuizId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PointUser", x => new { x.PointsId, x.UsersId });
+                    table.PrimaryKey("PK_Points", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PointUser_Points_PointsId",
-                        column: x => x.PointsId,
-                        principalTable: "Points",
+                        name: "FK_Points_Quizzes_QuizId",
+                        column: x => x.QuizId,
+                        principalTable: "Quizzes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PointUser_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_Points_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PointUser_UsersId",
-                table: "PointUser",
-                column: "UsersId");
+                name: "IX_Points_QuizId",
+                table: "Points",
+                column: "QuizId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Points_UserId",
+                table: "Points",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Questions_QuizId",
                 table: "Questions",
                 column: "QuizId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Quizzes_PointId",
-                table: "Quizzes",
-                column: "PointId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_QuizId",
@@ -139,7 +121,7 @@ namespace QuizLand.DataLayer.Core.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PointUser");
+                name: "Points");
 
             migrationBuilder.DropTable(
                 name: "Questions");
@@ -149,9 +131,6 @@ namespace QuizLand.DataLayer.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "Quizzes");
-
-            migrationBuilder.DropTable(
-                name: "Points");
         }
     }
 }

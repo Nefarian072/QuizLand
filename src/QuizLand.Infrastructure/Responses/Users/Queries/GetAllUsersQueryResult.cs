@@ -3,6 +3,6 @@ namespace QuizLandInfrastructure.Responses.Users.Queries;
 
 public class GetAllUsersQueryResult
 {
-    public string Message { get; set; }
+    public string? Message { get; set; }
     public IEnumerable<UserDto> Users { get; set; } = new List<UserDto>();
 }
