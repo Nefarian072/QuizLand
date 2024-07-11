@@ -21,7 +21,11 @@ public class RepositoryManager : IRepositoryManager
         _pointRepository = new PointRepository(_context);
     }
 
-    public async Task Save() => await _context.SaveChangesAsync();
+    public async Task Save()
+    {
+        await _context.SaveChangesAsync();
+        _context.ChangeTracker.Clear();
+    }
 
     public IUserRepository UserRepository => _userRepository;
 

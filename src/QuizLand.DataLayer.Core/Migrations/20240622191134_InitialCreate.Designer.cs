@@ -12,7 +12,7 @@ using QuizLand.WebAPI;
 namespace QuizLand.DataLayer.Core.Migrations
 {
     [DbContext(typeof(QuizLandDbContext))]
-    [Migration("20240419203748_Initial-Create")]
+    [Migration("20240622191134_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,21 +24,6 @@ namespace QuizLand.DataLayer.Core.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("PointUser", b =>
-                {
-                    b.Property<int>("PointsId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("PointsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("PointUser");
-                });
 
             modelBuilder.Entity("QuizLand.DataLayer.Core.Entities.Point", b =>
                 {
@@ -54,10 +39,14 @@ namespace QuizLand.DataLayer.Core.Migrations
                     b.Property<int>("QuizId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UsertId")
+                    b.Property<int>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Points");
                 });
@@ -95,24 +84,19 @@ namespace QuizLand.DataLayer.Core.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CreatorId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int?>("PointId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("integer");
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
 
                     b.Property<string>("Theme")
                         .HasColumnType("text");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PointId");
 
                     b.ToTable("Quizzes");
                 });
@@ -147,19 +131,23 @@ namespace QuizLand.DataLayer.Core.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("PointUser", b =>
+            modelBuilder.Entity("QuizLand.DataLayer.Core.Entities.Point", b =>
                 {
-                    b.HasOne("QuizLand.DataLayer.Core.Entities.Point", null)
+                    b.HasOne("QuizLand.DataLayer.Core.Entities.Quiz", "Quiz")
                         .WithMany()
-                        .HasForeignKey("PointsId")
+                        .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("QuizLand.DataLayer.Core.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
+                    b.HasOne("QuizLand.DataLayer.Core.Entities.User", "User")
+                        .WithMany("Points")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Quiz");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("QuizLand.DataLayer.Core.Entities.Question", b =>
@@ -173,13 +161,6 @@ namespace QuizLand.DataLayer.Core.Migrations
                     b.Navigation("Quiz");
                 });
 
-            modelBuilder.Entity("QuizLand.DataLayer.Core.Entities.Quiz", b =>
-                {
-                    b.HasOne("QuizLand.DataLayer.Core.Entities.Point", null)
-                        .WithMany("Quizzes")
-                        .HasForeignKey("PointId");
-                });
-
             modelBuilder.Entity("QuizLand.DataLayer.Core.Entities.User", b =>
                 {
                     b.HasOne("QuizLand.DataLayer.Core.Entities.Quiz", null)
@@ -187,16 +168,16 @@ namespace QuizLand.DataLayer.Core.Migrations
                         .HasForeignKey("QuizId");
                 });
 
-            modelBuilder.Entity("QuizLand.DataLayer.Core.Entities.Point", b =>
-                {
-                    b.Navigation("Quizzes");
-                });
-
             modelBuilder.Entity("QuizLand.DataLayer.Core.Entities.Quiz", b =>
                 {
                     b.Navigation("Questions");
 
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("QuizLand.DataLayer.Core.Entities.User", b =>
+                {
+                    b.Navigation("Points");
                 });
 #pragma warning restore 612, 618
         }

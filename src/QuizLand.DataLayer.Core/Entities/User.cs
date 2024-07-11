@@ -4,7 +4,6 @@ namespace QuizLand.DataLayer.Core.Entities;
 
 public class User : BaseEntity
 {
-    public new int Id { get; set; }
     [Required]
     public string Name { get; set; }
     [Required]

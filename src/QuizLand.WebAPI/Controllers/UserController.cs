@@ -9,7 +9,7 @@ using QuizLandInfrastructure.Responses.Users.Commands;
 namespace QuizLand.WebAPI.Controllers;
 
 [Route("/[Controller]")]
-public class UserController : Controller
+public class UserController : ControllerBase
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
