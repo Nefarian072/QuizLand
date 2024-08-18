@@ -38,6 +38,20 @@ public class RateTheAnswerCommandHandler: IRequestHandler<RateTheAnswerCommand, 
         var questions = _mapper.Map<IEnumerable<QuestionDto>>(quiz.Questions);
         var answers = request.Answers;
         var score = 0;
+        if( await _repositoryManager.PointRepository.CheckPointsByUserIdAndQuizId(request.ParticipantId, request.QuizId))
+        {
+            return new RateTheAnswerCommandResult
+            {
+                Message = "Вы уже проходили эту викторину"
+            };
+        }
+        if (questions.Count() != answers.Count())
+        {
+            return new RateTheAnswerCommandResult
+            {
+                Message = "Количество ответов не совпадает с количеством вопросов"
+            };
+        }
         for (int i = 0; i < questions.Count(); i++)
         {
             if (answers.ElementAt(i)== questions.ElementAt(i).Answer)
